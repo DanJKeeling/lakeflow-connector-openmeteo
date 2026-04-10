@@ -12,8 +12,8 @@ from typing import Iterator
 import requests
 from pyspark.sql.types import StructType
 
-from lakeflow_connect_interface import LakeflowConnect
-from open_meteo_schemas import (
+from databricks.labs.community_connector.interface import LakeflowConnect
+from databricks.labs.community_connector.sources.open_meteo.open_meteo_schemas import (
     DAILY_FORECAST_SCHEMA,
     DEFAULT_DAILY_VARIABLES,
     DEFAULT_HOURLY_VARIABLES,

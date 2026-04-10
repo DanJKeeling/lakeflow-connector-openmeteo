@@ -21,6 +21,3 @@ tests/configs/dev_table_config.json
 
 # Test/cache
 .pytest_cache/
-
-# Scaffolding repo (not part of the connector)
-lakeflow-community-connectors/
