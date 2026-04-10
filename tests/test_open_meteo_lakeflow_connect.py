@@ -1,10 +1,5 @@
-import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "sources" / "open_meteo"))
-
-from open_meteo import OpenMeteoLakeflowConnect
-from test_suite import LakeflowConnectTests
+from databricks.labs.community_connector.sources.open_meteo.open_meteo import OpenMeteoLakeflowConnect
+from tests.test_suite import LakeflowConnectTests
 
 
 class TestOpenMeteoConnector(LakeflowConnectTests):
