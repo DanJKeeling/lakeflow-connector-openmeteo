@@ -25,12 +25,17 @@ from typing import Any, Callable, Dict, List, Optional, Type
 import pytest
 from pyspark.sql.types import *  # pylint: disable=wildcard-import,unused-wildcard-import
 
-from databricks.labs.community_connector.interface.lakeflow_connect import LakeflowConnect
-from databricks.labs.community_connector.interface.supports_partition import (
-    SupportsPartition,
-    SupportsPartitionedStream,
-)
-from databricks.labs.community_connector.libs.utils import parse_value
+from lakeflow_connect_interface import LakeflowConnect
+
+try:
+    from supports_partition import SupportsPartition, SupportsPartitionedStream
+except ImportError:
+    class SupportsPartition:  # type: ignore[no-redef]
+        pass
+    class SupportsPartitionedStream:  # type: ignore[no-redef]
+        pass
+
+from utils import parse_value
 
 VALID_INGESTION_TYPES = {"snapshot", "cdc", "cdc_with_deletes", "append"}
 _INVALID_TABLE_NAME = "__nonexistent_table_$$_9z9z9z__"
