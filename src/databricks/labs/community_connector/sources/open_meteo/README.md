@@ -19,7 +19,8 @@ To configure the connector, provide the following parameters in your connector o
 | `latitude` | String | Yes | Geographic latitude in decimal degrees (WGS84) for the forecast location. | `"52.52"` |
 | `longitude` | String | Yes | Geographic longitude in decimal degrees (WGS84) for the forecast location. | `"13.41"` |
 | `apikey` | String | No | API key for commercial Open-Meteo subscriptions. Omit for free tier (non-commercial use). When provided, requests are routed to the commercial API endpoint. | `"your-api-key"` |
-| `externalOptionsAllowList` | String | Yes | A comma-separated list of table-specific options that can be configured per table. Must be set to: `forecast_days,timezone,temperature_unit,wind_speed_unit,precipitation_unit,models,hourly_variables,daily_variables` | `"forecast_days,timezone,temperature_unit,wind_speed_unit,precipitation_unit,models,hourly_variables,daily_variables"` |
+
+The `externalOptionsAllowList` connection option is set automatically by the Lakeflow Community Connector UI and CLI tooling. You do not need to specify it manually.
 
 ### Obtaining Coordinates
 
@@ -38,15 +39,14 @@ A Unity Catalog connection for this connector can be created in two ways:
 **Via the UI:**
 1. Follow the Lakeflow Community Connector UI flow from the "Add Data" page.
 2. Select any existing Lakeflow Community Connector connection for this source or create a new one.
-3. Set `externalOptionsAllowList` to `forecast_days,timezone,temperature_unit,wind_speed_unit,precipitation_unit,models,hourly_variables,daily_variables` so that these options can be configured per table.
+3. Provide your `latitude` and `longitude` when prompted.
 
 **Via SQL:**
 ```sql
 CREATE CONNECTION `open-meteo` TYPE lakeflow_community
 OPTIONS (
   latitude = '52.52',
-  longitude = '13.41',
-  externalOptionsAllowList = 'forecast_days,timezone,temperature_unit,wind_speed_unit,precipitation_unit,models,hourly_variables,daily_variables'
+  longitude = '13.41'
 );
 ```
 
