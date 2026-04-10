@@ -33,12 +33,30 @@ If you need higher rate limits or are using the data for commercial purposes, si
 
 ### Create a Unity Catalog Connection
 
-A Unity Catalog connection for this connector can be created in two ways via the UI:
+A Unity Catalog connection for this connector can be created in two ways:
+
+**Via the UI:**
 1. Follow the Lakeflow Community Connector UI flow from the "Add Data" page.
 2. Select any existing Lakeflow Community Connector connection for this source or create a new one.
 3. Set `externalOptionsAllowList` to `forecast_days,timezone,temperature_unit,wind_speed_unit,precipitation_unit,models,hourly_variables,daily_variables` so that these options can be configured per table.
 
-The connection can also be created using the standard Unity Catalog API.
+**Via SQL:**
+```sql
+CREATE CONNECTION `open-meteo` TYPE lakeflow_community
+OPTIONS (
+  latitude = '52.52',
+  longitude = '13.41',
+  externalOptionsAllowList = 'forecast_days,timezone,temperature_unit,wind_speed_unit,precipitation_unit,models,hourly_variables,daily_variables'
+);
+```
+
+To update an existing connection (e.g., to change coordinates):
+```sql
+ALTER CONNECTION `open-meteo` SET OPTIONS (
+  latitude = '48.8566',
+  longitude = '2.3522'
+);
+```
 
 
 ## Supported Objects
@@ -127,18 +145,17 @@ Follow the Lakeflow Community Connector UI, which will guide you through setting
 1. Update the `pipeline_spec` in the main pipeline file (e.g., `ingest.py`).
 2. Set the `source_table` to either `hourly_forecast` or `daily_forecast` for each table you want to ingest. Use the `table_configuration` map to customize forecast options per table.
 
-```json
-{
-  "pipeline_spec": {
-      "connection_name": "my_open_meteo_connection",
-      "object": [
+```python
+pipeline_spec = {
+    "connection_name": "open-meteo",
+    "objects": [
         {
             "table": {
                 "source_table": "hourly_forecast",
+                "destination_table": "open_meteo_hourly_forecast",
                 "table_configuration": {
                     "forecast_days": "3",
                     "timezone": "auto",
-                    "temperature_unit": "celsius",
                     "hourly_variables": "temperature_2m,precipitation,wind_speed_10m"
                 }
             }
@@ -146,6 +163,7 @@ Follow the Lakeflow Community Connector UI, which will guide you through setting
         {
             "table": {
                 "source_table": "daily_forecast",
+                "destination_table": "open_meteo_daily_forecast",
                 "table_configuration": {
                     "forecast_days": "7",
                     "timezone": "auto",
@@ -153,8 +171,7 @@ Follow the Lakeflow Community Connector UI, which will guide you through setting
                 }
             }
         }
-      ]
-  }
+    ],
 }
 ```
 

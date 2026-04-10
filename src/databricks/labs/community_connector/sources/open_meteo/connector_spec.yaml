@@ -4,6 +4,20 @@
 
 connection:
   parameters:
+    - name: latitude
+      type: string
+      required: true
+      description: >
+        Geographic latitude in decimal degrees (WGS84) for the forecast
+        location. Example: "52.52" for Berlin.
+
+    - name: longitude
+      type: string
+      required: true
+      description: >
+        Geographic longitude in decimal degrees (WGS84) for the forecast
+        location. Example: "13.41" for Berlin.
+
     - name: apikey
       type: string
       required: false
