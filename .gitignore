@@ -8,8 +8,8 @@ build/
 .eggs/
 
 # Config with credentials
-configs/dev_config.json
-configs/dev_table_config.json
+tests/configs/dev_config.json
+tests/configs/dev_table_config.json
 
 # IDE
 .idea/
