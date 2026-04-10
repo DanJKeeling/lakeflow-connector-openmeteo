@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+.eggs/
+
+# Config with credentials
+configs/dev_config.json
+configs/dev_table_config.json
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+
+# Test/cache
+.pytest_cache/
+
+# Scaffolding repo (not part of the connector)
+lakeflow-community-connectors/

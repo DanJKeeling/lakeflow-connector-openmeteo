@@ -1,0 +1,16 @@
+# Open-Meteo Community Connector Spec
+# This file defines the specification for the connector including
+# connection parameters and allowlist options.
+
+connection:
+  parameters:
+    - name: apikey
+      type: string
+      required: false
+      description: >
+        API key for commercial Open-Meteo subscriptions. Omit for
+        free tier (non-commercial use, CC-BY 4.0 license).
+        When provided, requests are sent to customer-api.open-meteo.com
+        instead of api.open-meteo.com.
+
+external_options_allowlist: "forecast_days,timezone,temperature_unit,wind_speed_unit,precipitation_unit,models,hourly_variables,daily_variables"
